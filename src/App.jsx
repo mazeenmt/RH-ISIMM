@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import Login from './Components/Users/Login'
+import Signup from './Components/Users/Signup'
 import Users from './Components/Users/Users'
 import ModifyUser from './Components/Users/ModifyUser'
 import LeaveRequestForm from './Components/Leaves/LeaveRequestForm';
@@ -51,6 +52,7 @@ export default function App() {
       {<DevNavigation /> /*just wa9t l developpement */}
       <Routes>
         <Route exact path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/users" element={<Users />} />
         <Route path="/users/modify" element={<ModifyUser />} />
         <Route path="/leaves/form" element={<LeaveRequestForm />} />

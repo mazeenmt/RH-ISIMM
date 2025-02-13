@@ -10,7 +10,7 @@ export default function ModifyUser() {
         </h1>
         <form className="space-y-6">
           {/* Including UserInfo component */}
-          <UserInfo />
+          {/* <UserInfo /> */}
 
           {/* User Role Section */}
           <div className="bg-gray-50 p-4 rounded-md shadow-sm">
