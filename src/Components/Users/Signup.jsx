@@ -57,6 +57,12 @@ export default function Signup() {
     setConfirmPassword(newConfirmPassword);
     if (newConfirmPassword) {
       setPasswordsMatch(password === newConfirmPassword);
+      if(passwordsMatch){
+        setUserData((prevData) => ({
+          ...prevData,
+          password: password,
+      }));
+      }
     } else {
       setPasswordsMatch(null);
     }
@@ -64,19 +70,19 @@ export default function Signup() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(userData)
     setUserData((prevData) => ({
         ...prevData,
         [name]: value,
     }));
   };
 
-  const postData = () => {
+  const postData = (event) => {
     if (validatedPassword && passwordsMatch){
-    axios.post("http://localhost:8080/users/create", userData, 
+    axios.post("http://localhost:8080/users/create", JSON.stringify(userData), 
       {headers: { "content-type": "application/json"}}
     )
             .then(response => {
+                console.log("Waiting for email confirmation...")
                 console.log(response)
             })
             .catch(error => {
@@ -91,7 +97,7 @@ export default function Signup() {
         <h1 className="text-3xl font-semibold text-center text-blue-600 mb-6">
           Créer un compte utilisateur
         </h1>
-        <form className="space-y-6">
+        <div className="space-y-6">
           <UserInfo userData={userData} setUserData={setUserData}/>
 
           <div className="bg-gray-50 p-4 rounded-md shadow-sm">
@@ -203,12 +209,12 @@ export default function Signup() {
           <div className="flex justify-center">
             <button
               onClick={postData}
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
             >
               Sauvegarder
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
