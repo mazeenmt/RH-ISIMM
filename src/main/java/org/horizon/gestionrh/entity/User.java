@@ -27,15 +27,24 @@ public class User {
 
     @Column(nullable=false, updatable=false)
     @CreatedDate
-    private LocalDateTime createdAt; //Enum
+    private LocalDateTime createdAt;
+
+    @Column(name = "verified", nullable=false)
+    private boolean verified;
+
+    @Column(name = "token")
+    private String token;
+
 
     public User(){}
 
-    public User(String username, String email, String password, Role role) {
+    public User(String username, String email, String password, Role role, boolean verified, String token) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.verified = verified;
+        this.token = null;
     }
 
     public long getId() {
@@ -82,5 +91,19 @@ public class User {
         return createdAt;
     }
 
+    public boolean isVerified() {
+        return verified;
+    }
 
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }
